@@ -1,0 +1,41 @@
+---
+- name: Installing Apache
+  hosts: all
+  become: true
+  tasks:
+   
+  - name: Updating Cache
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Updating Cache
+    yum:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: Installing Apache2 (Ubuntu)
+    apt:
+      name: apache2
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Installing httpd(Apache2) (CentOS)
+    yum:
+      name: httpd
+      state: present
+    when: ansible_distribution == "CentOS"
+
+  - name: Start and Enabling Apache2 Service (Ubuntu)
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Start and Enabling httpd(Apache2) Service (CentOS)
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
