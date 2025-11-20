@@ -1,5 +1,4 @@
 ---
-- hosts: all
-  roles:
-    - Enterprise
-  become: true
+username: Carbonera
+apache_service: "apache2"
+nodeexporter_version: "1.7.0"

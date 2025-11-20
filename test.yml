@@ -1,8 +1,0 @@
----
-
-- hosts: all
-  become: true
-  tasks:
-
-  - name: This is a Test
-    ansible.builtin.shell: echo "This is a test"
