@@ -1,0 +1,20 @@
+services:
+  apache:
+    image: httpd:latest
+    container_name: apache_server
+    ports:
+      - "8080:80"
+    restart: always
+
+  node_exporter:
+    image: prom/node-exporter:v1.7.0
+    container_name: node_exporter
+    network_mode: "host"
+    pid: "host"
+    restart: always
+
+  motd:
+    build: .
+    container_name: motd_service
+    command: ["bash", "-c", "cat /etc/motd && tail -f /dev/null"]
+    restart: always

@@ -1,0 +1,19 @@
+---
+- name: Install Apache on Ubuntu
+  apt:
+    name: "{{ apache_service }}"
+    update_cache: yes
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Apache on CentOS
+  yum:
+    name: httpd
+    state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: Start and enable Apache service
+  service:
+    name: "{{ apache_service if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+    state: started
+    enabled: yes
